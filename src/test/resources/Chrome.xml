@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression Suite" thread-count="1" parallel="tests">
+    <parameter name="hubURL" value="http://localhost:4444/wd/hub" />
+    <parameter name="auturl" value="https://openweathermap.org/" />
+
+    <test name="Open weather demo">
+        <parameter name="browser" value="chrome" />
+        <parameter name="GlobalTestDataPath" value="src/test/resources/GlobalTestDataNote9.json" />
+        <classes>
+            <class name="runners.RunFeatures" />
+        </classes>
+    </test>
+
+</suite>
