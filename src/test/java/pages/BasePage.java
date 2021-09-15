@@ -1,5 +1,8 @@
 package pages;
 
+import base.BaseTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +12,7 @@ import java.time.Duration;
 
 public class BasePage {
 
+    private static final Logger logger = LogManager.getLogger(BasePage.class);
     public static int EXPLICIT_TIME = 4;
     By loadState = By.cssSelector("[aria-label='Loading']");
 
@@ -16,7 +20,7 @@ public class BasePage {
 
     public void sendKeys(WebElement e, CharSequence ...c){
         e.sendKeys(c);
-        System.out.println("Sent keys: " + c[0]);
+        logger.info("Sent keys: " + c[0]);
     }
 
     public void waitForLoadingFinish(){
@@ -29,14 +33,14 @@ public class BasePage {
 
 
     public WebElement waitPresence(By by, long timeOutInSeconds) {
-        System.out.println("Start Finding Element : " + by.toString());
+        logger.info("Start Finding Element : " + by.toString());
         WebElement element = null;
         try {
             element = new WebDriverWait(driver, Duration.ofSeconds(timeOutInSeconds) ).ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions
                             .presenceOfElementLocated(by));
         } catch (TimeoutException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
             element = null;
         }
         return element;

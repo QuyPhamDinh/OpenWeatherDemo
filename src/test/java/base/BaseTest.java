@@ -3,10 +3,11 @@ package base;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
@@ -19,7 +20,7 @@ import java.time.Duration;
 @CucumberOptions(monochrome = true, strict = true, dryRun = false)
 public class BaseTest extends AbstractTestNGCucumberTests {
 
-    private static Logger logger = LoggerFactory.getLogger(BaseTest.class);
+    private static final Logger logger = LogManager.getLogger(BaseTest.class);
     BrowserFactory browserFactory = new BrowserFactory();
     public static String hubURL;
     public static String AUTURL;
@@ -43,19 +44,20 @@ public class BaseTest extends AbstractTestNGCucumberTests {
         DriverFactory.getInstance().setDriver(browserFactory.createInstance(browser));
         WebDriver driver = DriverFactory.getInstance().getDriver();
         driver.manage().window().maximize();
+        logger.info("Maximizing Browser");
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
         driver.get(AUTURL);
     }
 
     @AfterClass(alwaysRun = true)
     public synchronized static void tearDown() {
-        System.out.println("Quit appium driver after class");
+        logger.debug("Quit appium driver after class");
         DriverFactory.getInstance().closeBrower();
     }
 
     @AfterSuite
     public void suitEnd() {
-        System.out.println("After suite");
+        logger.debug("After suite");
     }
 
     public static void takeScreenshot() {
@@ -70,7 +72,7 @@ public class BaseTest extends AbstractTestNGCucumberTests {
             String screenShotFilePath = Paths.get("./test-output/screenshots/" + date + ".png").toAbsolutePath()
                     .normalize().toString();
             FileUtils.copyFile(scrFile, new File(screenShotFilePath));
-            System.out.println("screenShotFilePath >> " + screenShotFilePath);
+            logger.debug("screenShotFilePath >> " + screenShotFilePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
