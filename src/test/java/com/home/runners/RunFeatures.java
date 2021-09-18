@@ -1,13 +1,13 @@
-package runners;
+package com.home.runners;
 
-import base.BaseTest;
-import cucumber.api.CucumberOptions;
+import com.home.base.BaseTest;
+import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
         "json:target/cucumber-reports/CucumberTestReport.json",
         "rerun:target/cucumber-reports/rerun.txt" }, 
         features = "src/test/resources/features",
-glue = "steps")
+        extraGlue = "com/home/steps")
 public class RunFeatures extends BaseTest {
 }

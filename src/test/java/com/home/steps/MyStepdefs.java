@@ -1,23 +1,28 @@
-package steps;
+package com.home.steps;
 
-import assertion.MySoftAssert;
-import base.DriverFactory;
+import com.home.assertion.*;
+import com.home.base.DriverFactory;
+
+import com.home.context.Fruit;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.asserts.SoftAssert;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import pages.HomePage;
+import com.home.pages.HomePage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class MyStepdefs {
+public class MyStepdefs extends AbstractTestDefinition {
     private static Logger logger = LoggerFactory.getLogger(HomePage.class);
     SoftAssert softassert = new MySoftAssert();
     HomePage homePage = new HomePage(DriverFactory.getInstance().getDriver());
 
+    @Autowired
+    private Fruit fruit;
     private String searchedText;
 
     @Given("the defined browser opens up")
@@ -58,11 +63,16 @@ public class MyStepdefs {
         softassert.assertTrue(homePage.waitUntilCityNameStartWith(searchedText));
 
         softassert.assertTrue(homePage.isTemperatureDisplayed());
+        logger.info(String.format("Fruit name is: %s",fruit.getName()));
     }
 
     private String getDate(String pattern){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
+
+
     }
+
+
 }

@@ -8,7 +8,7 @@
         <parameter name="browser" value="firefox" />
         <parameter name="GlobalTestDataPath" value="src/test/resources/GlobalTestDataNote9.json" />
         <classes>
-            <class name="runners.RunFeatures" />
+            <class name="com.home.runners.RunFeatures" />
         </classes>
     </test>
 

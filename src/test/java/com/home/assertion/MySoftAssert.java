@@ -1,6 +1,6 @@
-package assertion;
+package com.home.assertion;
 
-import base.BaseTest;
+import com.home.base.BaseTest;
 import org.testng.asserts.IAssert;
 import org.testng.asserts.SoftAssert;
 

@@ -1,9 +1,6 @@
-package base;
+package com.home.base;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.Locale;
 

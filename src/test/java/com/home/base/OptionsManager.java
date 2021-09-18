@@ -1,6 +1,5 @@
-package base;
+package com.home.base;
 
-import cucumber.api.java.sl.In;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;

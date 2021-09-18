@@ -1,14 +1,13 @@
-package base;
+package com.home.base;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
 import java.io.File;
